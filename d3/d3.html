@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <p>Vue</p>
+  <p>React</p>
+  <p>Node</p>
+  <button id='btn'> 改变</button>
+</body>
+<script src="https://d3js.org/d3.v5.js"></script>
+<script>
+  //这是d3里面的dom //!通过数据驱动形式来绘制矢量图  
+  let body = d3.select('body')
+  let p = body.selectAll('p');
+  document.getElementById('btn').addEventListener('click',(e)=>{
+    const dataset = ['Vue','React']
+    //p.datum('aaa').text((d,u)=>`${d}-${u}`) //单个字符
+    p.data(dataset).text((d,u)=>`${d}-${u}`) //多个字符对应
+  })
+</script>
+</html>

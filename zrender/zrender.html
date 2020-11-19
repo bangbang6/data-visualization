@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="container" style='width:800px;height:800px'></div>
+  <script src="https://cdn.jsdelivr.net/npm/zrender@4.3.0/dist/zrender.js"></script>
+  <script>
+    let zr = zrender.init(document.getElementById('container'))
+    let rect=  new zrender.Rect({
+      shape:{
+        x:100,
+        y:100,
+        width:100,
+        height:200
+      },
+      style:{
+        fill:'red',
+        stroke:"blue",
+
+        lineWidth:5
+      }
+    })
+    let line = new zrender.Polyline({
+      shape:{
+        points:[[200,200],[250,240],[300,310]]
+      },
+      style:{
+        stroke:"red",
+        lineWidth:2
+      }
+    })
+    let circle = new zrender.Circle({
+      shape:{
+        cx:500,
+        cy:500,
+        r:50
+      },
+      style:{
+        fill:"green",
+        stroke:"yellow",
+        lineWidth:10
+      }
+    })
+    zr.add(rect)
+    zr.add(line)
+    zr.add(circle)
+  </script>
+</body>
+</html>
