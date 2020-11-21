@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+    <input type="file"  id="file">
+    <script>
+      function max(a,b){
+        return a>b?a:b
+      }
+      let input = document.getElementById('file')
+      function compress(b64){
+        let img = new Image()
+        img.src = b64
+        const maxW = 200
+        const maxH = 200
+        img.addEventListener('load',(e)=>{
+          let radio=1;
+          console.log(img.naturalHeight,img.naturalWidth);
+          if(img.naturalWidth > maxW){
+            radio = img.naturalWidth / maxW
+          }
+          if(img.naturalHeight > maxH){
+            radio = max((img.naturalHeight / maxH),radio)
+
+          }
+          let canvas = document.createElement('canvas')
+          canvas.setAttribute('id','compress')
+          canvas.width = img.naturalWidth/radio
+          canvas.height = img.naturalHeight/radio
+          canvas.style.visibility = 'visible'
+          document.body.appendChild(canvas)
+          let ctx = canvas.getContext('2d')
+          ctx.clearRect(0,0,img.naturalWidth/radio,img.naturalHeight/radio)
+          ctx.drawImage(img,0,0,img.naturalWidth/radio,img.naturalHeight/radio)
+          let _img = canvas.toDataURL('image/jepg',0.1)
+          console.log(_img);
+          let img2 = new Image()
+          img2.src = _img
+          document.body.appendChild(img2)
+          canvas.remove()
+        })
+        document.body.appendChild(img)
+      }
+      function convertImageTob64(file){
+        let reader = new FileReader() //先读取图片 用到文件读取
+        reader.readAsDataURL(file)//读取到内部url base64格式
+        reader.addEventListener('load',(e)=>{
+          //reader对象读出来都是base64格式
+          console.log(e.target.result);
+          compress(e.target.result)
+          reader = null
+        })
+      }
+      input.addEventListener('change',(e)=>{
+        //!文件的信息和显示的信息都是在input这个dom对象上的，而不是e这个对象上
+        let file = input.files[0]
+        let {size,type} = file
+        
+        if(size > 10000){
+          input.value = ''
+          //缩小文件
+          convertImageTob64(file)
+          return 
+        }
+      })
+    </script>
+</body>
+</html>
