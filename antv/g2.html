@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+ <!--  图标绘制是G2-plot -->
+ <div id="chart"></div>
+ <script type="text/javascript" src="https://unpkg.com/@antv/g2plot@latest/dist/g2plot.min.js"></script>
+<script>
+   const data = [
+        { year: '1991', value: 3 },
+        { year: '1992', value: 4 },
+        { year: '1993', value: 3.5 },
+        { year: '1994', value: 5 },
+        { year: '1995', value: 4.9 },
+        { year: '1996', value: 6 },
+        { year: '1997', value: 7 },
+        { year: '1998', value: 9 },
+        { year: '1999', value: 13 },
+      ];
+  const options = {
+    title:{
+      visible:true,
+      text:"G2plot示例图"
+    },
+    data,
+    xField:"year",
+    yField:"value",
+    description:{
+      visible:true,
+      text:"副标题描述"
+    },
+    point:{
+      visible:true,
+      size:5,
+      color:'white',
+      style:{
+        stroke:"#fe740c",
+        lineWidth:5,
+        fillopacity:1
+      }
+    },
+    label:{
+      visible:true
+    },
+    color:'#f2740c',
+    yAxis:{
+      formatter:(v)=>{
+        
+        return v+'k'
+      }
+    }
+  }
+  
+  const chartDom  = document.getElementById('chart')
+  const line  =new G2Plot.Line(chartDom,options)
+  line.render()
+</script>
+</body>
+</html>
