@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="chart" style='width:800px;height:800px'></div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/echarts@4.9.0/dist/echarts.min.js"></script>
+
+<script>
+  const chartDom = document.getElementById('chart')
+    const chart = echarts.init(chartDom,'purple-passion')
+    //!div如果不指定宽高 默认是宽度是100% 高度是0
+
+    chart.setOption({
+      title:{
+        text:"多坐标系"
+      },
+      xAxis:{
+        type:'category'
+      },
+      yAxis:[
+        {},{}
+      ],
+      dataset:{
+        source: [
+            ['product', '2012', '2013', '2014', '2015'],
+            ['Matcha Latte', 41.1, 30.4, 65.1, 53.3],
+            ['Milk Tea', 86.5, 92.1, 85.7, 83.1]
+          ]
+      },
+      series:[{
+        type:'bar',
+        seriesLayoutBy:'row',
+        yAxisIndex:0,//对应yaxis第一个坐标系
+       
+      },{
+        type:'line',
+        seriesLayoutBy:'row',
+        yAxisIndex:1,//对应yaxis第一个坐标系
+      }]
+    })
+</script>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="chart" style='width:800px;height:800px'></div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/echarts@4.9.0/dist/echarts.min.js"></script>
+
+<script>
+  const chartDom = document.getElementById('chart')
+    const chart = echarts.init(chartDom,'purple-passion',{renderer:'svg'})
+    //!div如果不指定宽高 默认是宽度是100% 高度是0
+    chart.setOption({
+      title:{text:"一个坐标系绘制多个图",subtext:"可视化课程"},
+      dataset:{
+        source:[
+          ['Vue',100,79,'分类1',100],
+          ['React',112,81,'分类2',200],
+          ['node',150,95,'分类3',210],         
+          ['算法',123,72,'分类4',260]
+        ]
+      },
+      series:[{ 
+        name:"分类",
+        type:'pie',//图形类型 
+        center:['50%',60], //中心位置
+        radius:35,
+        encode:{itemName:3,value:4},
+         
+          
+      },{
+        type:'bar',
+        name:"柱状图",
+
+        encode:{x:0,y:1}
+      },{type:'line',
+      name:"折线图",
+      
+      encode:{x:0,y:2} }],
+      xAxis:{
+       type:'category'
+      }, 
+      yAxis:{},
+      legend:{
+        data:[{name:'分类',icon:'circle',textStyle:{color:'red'}},'折线图','柱状图'],
+        left:100
+      },
+      toolbox:{
+        feature:{
+          dataZoom:{
+            yAxisIndex:false
+          },
+          restore:{},
+          saveAsImage:{}
+        }
+      },
+      dataZoom:{},
+      grid:{
+        left:'10%',
+        top:150,
+      }
+    })
+</script>
+</html>
